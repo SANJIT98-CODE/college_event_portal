@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>College Events</title>
+        <link rel="stylesheet" href="https://cdn.jsdeliver.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    </head>
+    <body class="bg-light">
+    <div class="continer py-4">
+        <h1 class="mb-4">Upcoming College Events</h1>
+        <div class="row">
+            {% for event in events %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title>"{{ event.title }}</h5>
+                        <p class="card-text">{{ event.description }}</p>
+                        <p><strong>Date:</strong> {{ event.date }}</p>
+                        <a href="/register/{{ event.id }}" class="btn btn-primary">Register</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </body>
+</html>
