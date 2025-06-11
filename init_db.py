@@ -6,7 +6,7 @@ c = conn.cursor()
 
 # Create tables
 c.execute('''
-    CREATE TABLE events1 (
+    CREATE TABLE IF NOT EXISTS events1 (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL,
         description TEXT,
@@ -15,7 +15,7 @@ c.execute('''
 ''')
 
 c.execute('''
-    CREATE TABLE registrations (
+    CREATE TABLE IF NOT EXISTS registrations (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         event_id INTERGER,
         name TEXT,
@@ -32,5 +32,22 @@ sample_events = [
 ]
 c.executemany('INSERT INTO events (title, description, date) VALUES (?, ?, ?)', sample_events)
 
+
+# New registrations table creation
+c.execute('''
+    CREATE TABLE IF NOT EXISTS registrations (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        phone TEXT NOT NULL,
+        event_id INTEGER NOT NULL,
+        FOREIGN KEY (event_id) REFERENCES events(id)
+    )
+''')
+
 conn.commit()
 conn.close()
+
+
+
+
