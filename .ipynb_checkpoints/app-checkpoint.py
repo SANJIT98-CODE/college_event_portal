@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, flash
 import sqlite3
 
 app = Flask(__name__)
@@ -36,6 +36,16 @@ def register():
     events = conn.execute('SELECT * FROM events').fetchall()
     conn.close()
     return render_template('register.html', events=events)
+
+@app.route('/admin')
+def admin():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM registrations")
+    registraions = cursor.fetchall()
+    conn.close()
+    return render_template('admin.html', registrations=registrations)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

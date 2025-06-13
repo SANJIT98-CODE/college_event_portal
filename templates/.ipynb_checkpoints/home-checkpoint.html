@@ -7,12 +7,25 @@
     <body class="bg-light">
     <div class="continer py-4">
         <h1 class="mb-4">Upcoming College Events</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, messages in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        
         <div class="row">
             {% for event in events %}
             <div class="col-md-4 mb-3">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title>"{{ event.title }}</h5>
+                        <h5 class="card-title">{{ event.title }}</h5>
                         <p class="card-text">{{ event.description }}</p>
                         <p><strong>Date:</strong> {{ event.date }}</p>
                         <a href="/register/{{ event.id }}" class="btn btn-primary">Register</a>
