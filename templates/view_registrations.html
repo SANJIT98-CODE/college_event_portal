@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Registraions</title>
+        <link rel="stylesheet" href="https:cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstarp.min.css">
+    </head>
+    <body class="container mt-5">
+        <h2>Registrations for "{{ event[0] }}"</h2>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn-secondary mb-3">Back to Dashboard</a>
+        <a href="{{ url_for('export_registrations', event_id=event_id }}" class="btn btn-success mb-3">Download CSV</a>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" arial-label="close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endeith %}
+
+        {% if registrations %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reg in registrations %}
+                <tr>
+                    <td>{{ reg[0] }}</td>
+                    <td>{{ reg[1] }}</td>
+                    <td>{{ reg[2} }}</td>
+                    <td>
+                        <form method="POST" action="{{url_for('delete_registration') }}" style="display:inline;">
+                            <input type="hidden" name="event_id" value="{{ event_id }}">
+                            <input type="hidden" name="email" value="{{ reg[1] }}">
+                            <button type="submit" class="btn-danger btn-sm">Delete</button>
+                        </form>
+                   </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-info">No regisstrations found for this event.</div>
+        {% endif %}
+    </body>
+</html>
