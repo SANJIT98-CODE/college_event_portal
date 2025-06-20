@@ -19,5 +19,20 @@ It allows users to view upcoming events, register for them, and provides an admi
 - Jinja2 templating
 
 ## 📂 Project Structure
+college_event_portal/
+├── app.py
+├── config.py
+├── .env
+├── README.md
+├── events.db
+├── requirements.txt
+├── static/
+│ └── style.css
+├── templates/
+│ ├── index.html
+│ ├── register.html
+│ ├── admin_login.html
+│ ├── admin_dashboard.html
+│ └── view_registrations.html
 
 
