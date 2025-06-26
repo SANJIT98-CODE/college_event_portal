@@ -4,11 +4,14 @@
         <title>Admin Dashborad</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     </head>
-    <body class="container mt-5">
+    <body class="p-4">
         <h2>Welcome, Admin</h2>
-        <a href="{{url_for('admin_logout') }}" class="btn-danger mb-3>"Logout</a>
-
-        <table class="table table-bordered">
+        <p>You are successfully logged in.</p>
+        <a href="{{ url_for('admin_logout') }}" class="btn btn-danger mb-3>"Logout</a>
+        <a href="{{ url_for('add_event') }}" class="btn btn-success mb-3">+ Add New Event</a>
+        
+        <h3>All Events</h3>
+        <table border="1" class="table table-bordered">
             <thead>
                 <tr>
                     <th>event Title</th>
@@ -20,12 +23,17 @@
             <tbody>
                 {% for event in events %}
                 <tr>
-                    <td>{{ event[1] }}</td>
-                    <td>{{ event[2] }}</td>
-                    <td>{{ event[3] }}</td>
+                    <td>{{ event['title'] }}</td>
+                    <td>{{ event['date'] }}</td>
+                    <td>{{ event['description'] }}</td>
                     <td>
-                        <a href="{{ url_for('view_registration', event_id=event[0] }}" class="btn btn-primary btn-sm">
+                        <a href="{{ url_for('view_registrations', event_id=event['id']) }}" class="btn btn-primary btn-sm">
                             view
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('export_registration' event_id=event['id']) }}" clas="btn btn-success btn-sm">
+                            Export SCV
                         </a>
                     </td>
                 </tr>

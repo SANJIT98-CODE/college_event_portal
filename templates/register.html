@@ -8,6 +8,7 @@
         <div class="container">
             <h2 class="mb-4">Register for an Event</h2>
             <form method="POST">
+                {{ csrf_token() }}
                 <div class="mb-3">
                     <label>Name</label>
                     <input type="text" name="name class="form-control" required>
