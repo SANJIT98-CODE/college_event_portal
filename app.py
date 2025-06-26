@@ -29,7 +29,7 @@ def get_db_connection():
 @app.route('/')
 def home():
     conn = get_db_connection()
-    events = conn.execute('SELECT * FROM events1').fetchall()
+    events = conn.execute('SELECT * FROM events').fetchall()
     conn.close()
     return render_template('home.html', events=events)
 
